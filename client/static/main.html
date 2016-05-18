@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app='discussion_board'>
+  <head>
+    <title>Mini MEAN Store</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.min.js"></script>
+    <script type="text/javascript" src='http://code.jquery.com/jquery-2.2.2.js'></script>
+    <script src='/script/app.js'></script>
+    <script src='/script/factories.js'></script>
+    <script src='/script/controllers.js'></script>
+    <style>
+      .wrapper{
+        width: 700px;
+        margin: 0px auto;
+      }
+      .list{
+        width: 500px;
+      }
+      .list table, .list tr, .list th, .list td{
+        border: 1px solid grey;
+      }
+      .list table{
+        border-collapse: collapse;
+      }
+      .list th{
+        background-color: lightgrey;
+      }
+      .list th, .list td{
+        padding: 3px;
+        text-align: center;
+      }
+      .body{
+        margin-top: 20px;
+      }
+      .error{
+        font-size: 12px;
+        color: red;
+        margin: 0px;
+      }
+      .top_menu{
+        text-align: right;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='wrapper'>
+      <div class='top_menu'>
+        <a href="#/dashboard">Dashboard</a> | <a href="#/logout">Logout</a>
+      </div>
+      <div class='body' ng-view=""></div>
+    </div>
+  </body>
+</html>

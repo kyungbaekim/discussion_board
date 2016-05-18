@@ -1,0 +1,46 @@
+<div ng-controller='TopicController'>
+  <div class='top'>
+    <div>
+      <p align='right'><a href='#/dashboard'>Dashboard</a> | <a href='' ng-click='logout()'>Logout</a></p>
+    </div>
+    <div class='topic_content'>
+      <h3>{{topic[0]._user.name}} posted a topic</h3>
+      <p><b><i>{{topic[0].topic}}</i></b></p>
+      <p>Description: {{topic[0].description}}</p>
+    </div>
+  </div>
+  <div>
+    <div class='add_post'>
+      <h3 id='post_title'>Post you answer here...</h3>
+      <form>
+        <textarea id='post' ng-model='new_post.post' rows='5' cols='90'></textarea>
+        <input type='submit' ng-click='addPost(topic)' value='Add post'>
+      </form>
+    </div>
+    <div class='display_posts' ng-repeat='post in topic[0].posts'>
+      <hr>
+      <table>
+        <tr>
+          <td><a href='' ng-click='getUserInfo(post)'>{{post._user.name}}:</a>&nbsp;{{post.post}}</td>
+          <td>like</td>
+        </tr>
+        <tr>
+          <td colspan='2'>
+          <table>
+            <tr ng-repeat='comment in post.comments'>
+              <td><a href='' ng-click='getUserInfo(comment)'>{{comment._user.name}}:</a>&nbsp;{{comment.comment}}</td>
+            </tr>
+            <tr>
+              <td colspan='2'>
+                <form>
+                  <textarea ng-model='new_comment.comment' rows='5' cols='85'></textarea>
+                  <input type='submit' ng-click='addComment(post)' value='Add comment'>
+                </form>
+              </td>
+            </tr>
+          </table>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

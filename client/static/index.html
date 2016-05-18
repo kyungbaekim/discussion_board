@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app='discussion_board'>
+  <head>
+    <meta charset="utf-8">
+    <title>Discussion Board</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular-route.min.js"></script>
+    <script type="text/javascript" src='http://code.jquery.com/jquery-2.2.2.js'></script>
+    <script src='/script/app.js'></script>
+    <script src='/script/factories.js'></script>
+    <script src='/script/controllers.js'></script>
+    <style>
+      .wrapper{
+        width: 700px;
+        margin: 0px auto;
+      }
+      .login{
+        width: 350px;
+        margin: 0px auto;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin-top: -70px;
+        margin-left: -175px;
+        border: 1px solid silver;
+        padding: 15px 0px 15px 15px;
+      }
+      .bottom{
+        text-align: right;
+        margin-top: 20px;
+        margin-right: 20px;
+      }
+      #button1{
+        margin-top: 5px;
+      }
+      .search{
+        text-align: right;
+      }
+      .list table, .list tr, .list th, .list td{
+        border: 1px solid silver;
+      }
+      .list table{
+        border-collapse: collapse;
+        margin: 10px 0px 30px;
+      }
+      .list th, .list td{
+        padding: 3px;
+      }
+      .topic_content p{
+        /*margin-left: 20px;*/
+        margin: 5px 20px
+      }
+      .add_post form{
+        margin-right: 25px;
+        margin-bottom: 20px;
+        text-align: right;
+      }
+      #post_title{
+        margin: 30px 0px 5px 0px;
+      }
+      .display_posts table{
+        margin-left: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class='wrapper'>
+      <div class='body' ng-view=""></div>
+    </div>
+  </body>
+</html>

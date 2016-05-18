@@ -1,0 +1,56 @@
+<div ng-controller='TopicsController'>
+  <div class='top' ng-controller='UsersController'>
+    <div>
+      <p align='right'><a href='' ng-click='logout()'>Logout</a></p>
+    </div>
+    <div>
+      <h1>Welcome, {{user.sessionUser.name}}!</h1>
+    </div>
+  </div>
+  <div class='dashboard'>
+    <div class='search'>
+      <form>
+        <input class='input' type='text' ng-model='data_topic.search' placeholder='search...'>
+        <input type='submit' ng-click='searchTopic()' value='Filter'>
+      </form>
+    </div>
+    <div class='list'>
+      <table>
+        <tr>
+          <th width='150'>Category</th>
+          <th width='350'>Topic</th>
+          <th width='100'>User Name</th>
+          <th width='100'>Posts</th>
+        </tr>
+        <tr ng-repeat='topic in topics | filter:search | orderBy:"createdAt":true'>
+          <td ng-bind='topic.category'></td>
+          <td><a href='' ng-click='getTopic(topic)'>{{topic.topic}}</a></td>
+          <td ng-bind='topic._user.name'></td>
+          <td align=center ng-bind='topic.posts.length'></td>
+      </table>
+    </div>
+    <div class='add_post'>
+      <form>
+        <table>
+          <tr><td colspan='2'><b>Add a new Topic<b></td></tr>
+          <tr><td>Topic:</td><td><input type='text' id='topic' ng-model='new_topic.topic'></td></tr>
+          <tr><td>Description:</td><td><textarea ng-model='new_topic.description' rows='5' cols='50'></textarea></td></tr>
+          <tr><td>Category</td>
+            <td>
+              <select ng-model='new_topic.category'>
+                <option value='Ruby on Rails'>Ruby on Rails</option>
+                <option value='MySQL'>MySQL</option>
+                <option value='Web Development'>Web Development</option>
+                <option value='HTML'>HTML</option>
+                <option value='PHP'>PHP</option>
+                <option value='Python'>Python</option>
+                <option value='ios'>ios</option>
+              </select>
+            </td>
+          </tr>
+          <tr><td colspan='2' align=right><input type='submit' ng-click='addTopic()'></td></tr>
+        </table>
+      </form>
+    </div>
+  </div>
+</div>
