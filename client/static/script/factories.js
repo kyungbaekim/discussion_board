@@ -132,8 +132,8 @@ discussion.factory('commentFactory', function($http){
 discussion.factory('categoryFactory', function($http){
   var categories = [];
   var factory = {};
-  factory.getCategories = function(callback){
-    $http.get('/get_Categories').success(function(data){
+  factory.index = function(callback){
+    $http.get('/categories').success(function(data){
       categories = data;
       callback(categories);
     })

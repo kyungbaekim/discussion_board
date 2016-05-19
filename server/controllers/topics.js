@@ -17,7 +17,7 @@ module.exports = {
   create: function(req, res) {
     console.log(req.body);
     Users.findOne({_id: req.params.id}, function(err, user){
-      var topic = new Topics({topic: req.body.topic, description: req.body.description, category: req.body.category,  _user: user._id});
+      var topic = new Topics({topic: req.body.topic, description: req.body.description, category: req.body.category.category,  _user: user._id});
       topic.save(function(err){
         if(err){
           console.log('Error occurred while saving your topic', err);

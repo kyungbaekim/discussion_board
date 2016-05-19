@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Categories = mongoose.model('Categories');
+var category_list = ['PHP', 'MEAN', 'Ruby on Rails', 'ios', 'Python', 'React', 'Web Development'];
 
 module.exports = {
   index: function(req, res) {
@@ -8,39 +9,21 @@ module.exports = {
         res.json(err);
       }
       else{
+        console.log(categories);
+        if(!categories.length > 0){
+          console.log('category is empty');
+          for(var i=0; i<category_list.length; i++){
+            var category = new Categories({category: category_list[i]});
+            console.log(category_list[i]);
+            category.save(function(err, category) {
+              if(err) {
+                console.log(err);
+              }
+            })
+          }
+        }
         res.json(categories);
       }
     })
-  },
-  create: function(req, res) {
-    console.log(req.body, req.params.id);
-    Posts.findOne({_id: req.params.id}, function(err, post){
-      var comment = new Comments({comment: req.body.comment, _user: req.body.commentter_id, _post: req.body.post_id});
-      comment.save(function(err){
-        if(err){
-          console.log('Error occurred while saving your comment', err);
-        }
-        else{
-          post.comments.push(comment._id);
-          post.save(function(err) {
-            if(err) {
-              res.json({message: 'Error occurred while updating your message', error: topic.errors});
-            } else {
-              Users.findOne({_id: req.body.commentter_id}, function(err, user){
-                user.comments.push(comment._id);
-                user.save(function(err, user) {
-                  if(err) {
-                    res.json({message: 'Error occurred while updating your message', error: user.errors});
-                  } else {
-                    console.log('your topic successfully added!', user);
-                    res.json(user);
-                  }
-                })
-              });
-            }
-          });
-        }
-      });
-    });
   }
 }

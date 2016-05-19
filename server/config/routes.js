@@ -2,6 +2,7 @@ var users = require('../controllers/users.js');
 var topics = require('../controllers/topics.js');
 var posts = require('../controllers/posts.js');
 var comments = require('../controllers/comments.js');
+var categories = require('../controllers/categories.js');
 
 module.exports = function(app) {
   app.get('/users', function(req, res) {

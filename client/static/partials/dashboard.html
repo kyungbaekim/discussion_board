@@ -22,7 +22,7 @@
           <th width='100'>User Name</th>
           <th width='100'>Posts</th>
         </tr>
-        <tr ng-repeat='topic in topics | filter:search | limitTo:-5 | orderBy:"createdAt":true'>
+        <tr ng-repeat='topic in topics | filter:search | orderBy:"createdAt":true'>
           <td ng-bind='topic.category'></td>
           <td><a href='' ng-click='getTopic(topic)'>{{topic.topic}}</a></td>
           <td><a href='' ng-click='getUser(topic._user._id)'>{{topic._user.name}}</a></td>
@@ -37,15 +37,7 @@
           <tr><td>Description:</td><td><textarea ng-model='new_topic.description' rows='5' cols='50'></textarea></td></tr>
           <tr><td>Category</td>
             <td>
-              <select ng-model='new_topic.category'>
-                <option value='Ruby on Rails'>Ruby on Rails</option>
-                <option value='MySQL'>MySQL</option>
-                <option value='Web Development'>Web Development</option>
-                <option value='HTML'>HTML</option>
-                <option value='PHP'>PHP</option>
-                <option value='Python'>Python</option>
-                <option value='ios'>ios</option>
-              </select>
+              <select ng-model='new_topic.category' ng-options='category.category for category in categories'></select>
             </td>
           </tr>
           <tr><td colspan='2' align=right><input type='submit' ng-click='addTopic()'></td></tr>

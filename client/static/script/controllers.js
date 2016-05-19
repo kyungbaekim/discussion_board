@@ -13,9 +13,6 @@ discussion.controller('UsersController', function(userFactory, $scope, $location
         $location.url('/')
       }
     });
-    categoryFactory.getCategories(function(categories){
-      $scope.categories = categories;
-    })
   }
   $scope.login = function(){
     if(Object.keys($scope.user).length > 0){
@@ -41,7 +38,7 @@ discussion.controller('UsersController', function(userFactory, $scope, $location
   };
 });
 
-discussion.controller('TopicsController', function(topicFactory, userFactory, postFactory, commentFactory, $scope, $location, $routeParams){
+discussion.controller('TopicsController', function(topicFactory, userFactory, postFactory, commentFactory, categoryFactory, $scope, $location, $routeParams){
   console.log($routeParams);
   if(Object.keys($routeParams).length > 0){
     topicFactory.getTopic($routeParams, function(data){
@@ -54,6 +51,10 @@ discussion.controller('TopicsController', function(topicFactory, userFactory, po
       console.log($scope.topics);
       $('#topic').focus();
     });
+    categoryFactory.index(function(data){
+      $scope.categories = data;
+      console.log($scope.categories);
+    })
   }
   userFactory.getUser(function(info){
     $scope.user = info
@@ -63,6 +64,7 @@ discussion.controller('TopicsController', function(topicFactory, userFactory, po
   });
   $scope.addTopic = function(){
     var user_id = {id: $scope.user.sessionUser.id};
+    console.log($scope.new_topic, user_id);
     topicFactory.addTopic(angular.extend($scope.new_topic, user_id), function(data){
       console.log(data);
       $scope.topics = data;
