@@ -1,5 +1,6 @@
 discussion.factory('userFactory', function($http){
   var sessionUser = {};
+  var history = {};
   var users = [];
   var factory = {};
   // var getSession = function(){
@@ -43,19 +44,24 @@ discussion.factory('userFactory', function($http){
       }
     })
   }
+  factory.getUser = function(callback){
+    $http.get('/session_user').success(function(user){
+      sessionUser = user;
+      callback(sessionUser)
+    })
+  }
+  factory.searchUser = function(user, callback){
+    $http.get('/search_user/' + user.id).success(function(data){
+      history = data;
+      callback(history)
+    })
+  }
   factory.logout = function(callback){
     $http.get('/logout').success(function(data){
       if(data.status){
         sessionUser = data.sessionUser
       }
       callback(data)
-    })
-  }
-
-  factory.getUser = function(callback){
-    $http.get('/session_user').success(function(user){
-      sessionUser = user;
-      callback(sessionUser)
     })
   }
   return factory;
@@ -98,6 +104,39 @@ discussion.factory('postFactory', function($http){
   factory.addPost = function(newPost, callback){
     console.log(newPost);
     $http.post('/create_post/' + newPost.topic_id, newPost).success(function(post){
+      // console.log('Data received successfully');
+      $http.get('/get_topic/' + topic.id).success(function(data){
+        topic = data;
+        // console.log(topic);
+        callback(topic);
+      });
+    })
+  }
+  factory.likePost = function(Post, callback){
+    $http.post('/increase_like/' + Post.post_id).success(function(post){
+      $http.get('/get_topic/' + topic.id).success(function(data){
+        topic = data;
+        callback(topic);
+      });
+    })
+  }
+  factory.dislikePost = function(Post, callback){
+    $http.post('/increase_dislike/' + Post.post_id).success(function(post){
+      $http.get('/get_topic/' + topic.id).success(function(data){
+        topic = data;
+        callback(topic);
+      });
+    })
+  }
+  return factory;
+});
+
+discussion.factory('commentFactory', function($http){
+  var topic = [];
+  var factory = {};
+  factory.addComment = function(newComment, callback){
+    console.log(newComment);
+    $http.post('/create_comment/' + newComment.post_id, newComment).success(function(comment){
       // console.log('Data received successfully');
       $http.get('/get_topic/' + topic.id).success(function(data){
         topic = data;

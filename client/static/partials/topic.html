@@ -19,28 +19,22 @@
     </div>
     <div class='display_posts' ng-repeat='post in topic[0].posts'>
       <hr>
-      <table>
-        <tr>
-          <td><a href='' ng-click='getUserInfo(post)'>{{post._user.name}}:</a>&nbsp;{{post.post}}</td>
-          <td>like</td>
-        </tr>
-        <tr>
-          <td colspan='2'>
-          <table>
-            <tr ng-repeat='comment in post.comments'>
-              <td><a href='' ng-click='getUserInfo(comment)'>{{comment._user.name}}:</a>&nbsp;{{comment.comment}}</td>
-            </tr>
-            <tr>
-              <td colspan='2'>
-                <form>
-                  <textarea ng-model='new_comment.comment' rows='5' cols='85'></textarea>
-                  <input type='submit' ng-click='addComment(post)' value='Add comment'>
-                </form>
-              </td>
-            </tr>
-          </table>
-        </tr>
-      </table>
+      <div>
+        <div class='post'>
+          <a href='' ng-click='getUser(post._user._id)'>{{post._user.name}}:</a>&nbsp;{{post.post}}
+        </div>
+        <div class='like'>
+          {{post.like}} <button ng-click='likePost(post._id)'>&#708;</button>&nbsp;&nbsp;
+          {{post.dislike}} <a href='' ng-click='dislikePost(post._id)'><button>&#709;</button></a>
+        </div>
+        <div class='comment' ng-repeat='comment in post.comments'>
+          <a href='' ng-click='getUser(comment._user._id)'>{{comment._user.name}}:</a>&nbsp;{{comment.comment}}
+        </div>
+        <form>
+          <textarea ng-model='new_comment.comment' rows='5' cols='87'></textarea>
+          <input type='submit' ng-click='addComment(post, new_comment)' value='Add comment'>
+        </form>
+      </div>
     </div>
   </div>
 </div>

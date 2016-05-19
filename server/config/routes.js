@@ -1,10 +1,15 @@
 var users = require('../controllers/users.js');
 var topics = require('../controllers/topics.js');
 var posts = require('../controllers/posts.js');
+var comments = require('../controllers/comments.js');
 
 module.exports = function(app) {
   app.get('/users', function(req, res) {
     users.index(req, res);
+  })
+
+  app.get('/search_user/:id', function(req, res) {
+    users.search(req, res);
   })
 
   app.get('/topics', function(req, res) {
@@ -41,5 +46,17 @@ module.exports = function(app) {
 
   app.post('/create_post/:id', function(req, res) {
     posts.create(req, res);
+  })
+
+  app.post('/increase_like/:id', function(req, res) {
+    posts.update_like(req, res);
+  })
+
+  app.post('/increase_dislike/:id', function(req, res) {
+    posts.update_dislike(req, res);
+  })
+
+  app.post('/create_comment/:id', function(req, res) {
+    comments.create(req, res);
   })
 }

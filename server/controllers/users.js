@@ -40,6 +40,16 @@ module.exports = {
       }
     })
   },
+  search: function(req, res) {
+    Users.findOne({_id: req.params.id}, function(err, user){
+      if(err){
+        res.json(err);
+      }
+      else {
+        res.json(user);
+      }
+    })
+  },
   create: function(req, res) {
     console.log('In create function', req.body.name);
     var user = new Users({name: req.body.name});

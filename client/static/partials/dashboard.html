@@ -1,5 +1,5 @@
 <div ng-controller='TopicsController'>
-  <div class='top' ng-controller='UsersController'>
+  <div class='top'>
     <div>
       <p align='right'><a href='' ng-click='logout()'>Logout</a></p>
     </div>
@@ -25,7 +25,7 @@
         <tr ng-repeat='topic in topics | filter:search | orderBy:"createdAt":true'>
           <td ng-bind='topic.category'></td>
           <td><a href='' ng-click='getTopic(topic)'>{{topic.topic}}</a></td>
-          <td ng-bind='topic._user.name'></td>
+          <td><a href='' ng-click='getUser(topic._user._id)'>{{topic._user.name}}</a></td>
           <td align=center ng-bind='topic.posts.length'></td>
       </table>
     </div>

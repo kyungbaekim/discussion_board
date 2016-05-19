@@ -21,19 +21,19 @@ module.exports = {
       var topic = new Topics({topic: req.body.topic, description: req.body.description, category: req.body.category,  _user: user._id});
       topic.save(function(err){
         if(err){
-          // res.json({message:'Error occurred while saving your topic', error: topic.errors});
-          Users.find({})
-            .populate('topics')
-            .populate('posts')
-            .populate('comments')
-            .exec(function(err, data){
-              if(err){
-                res.json({error: user.errors});
-              }
-              else{
-                res.json(data);
-              }
-            });
+          console.log('Error occurred while saving your topic', err);
+          // Users.find({})
+          //   .populate('topics')
+          //   .populate('posts')
+          //   .populate('comments')
+          //   .exec(function(err, data){
+          //     if(err){
+          //       res.json({error: user.errors});
+          //     }
+          //     else{
+          //       res.json(data);
+          //     }
+          //   });
         }
         else{
           user.topics.push(topic._id);
