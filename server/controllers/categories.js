@@ -1,16 +1,14 @@
 var mongoose = require('mongoose');
-var Posts = mongoose.model('Posts');
-var Users = mongoose.model('Users');
-var Comments = mongoose.model('Comments');
+var Categories = mongoose.model('Categories');
 
 module.exports = {
   index: function(req, res) {
-    Posts.find({}, function(err, posts){
+    Categories.find({}, function(err, categories){
       if(err){
         res.json(err);
       }
       else{
-        res.json(posts);
+        res.json(categories);
       }
     })
   },

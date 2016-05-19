@@ -20,6 +20,10 @@ module.exports = function(app) {
     posts.index(req, res);
   })
 
+  app.get('/categories', function(req, res) {
+    categories.index(req, res);
+  })
+
   app.post('/find_user', function(req, res) {
     users.find(req, res);
   })
@@ -42,6 +46,10 @@ module.exports = function(app) {
 
   app.get('/get_topic/:id', function(req, res) {
     topics.find(req, res);
+  })
+
+  app.post('/search_topic', function(req, res) {
+    topics.search(req, res);
   })
 
   app.post('/create_post/:id', function(req, res) {

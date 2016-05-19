@@ -21,27 +21,19 @@ module.exports = {
       post.save(function(err){
         if(err){
           console.log('Error occurred while saving your post', err);
-          // Topics.findOne({_id: req.params.id}).deepPopulate('_user posts posts._user posts.comments posts.comments._user posts.comments.comment').exec(function(err, topic){
-          //     if(err){
-          //       res.json(err);
-          //     }
-          //     else {
-          //       res.json(topic);
-          //     }
-          //   });
         }
         else{
           topic.posts.push(post._id);
           topic.save(function(err, topic) {
             if(err) {
               res.json({message: 'Error occurred while updating your message', error: topic.errors});
-            } else { // else console.log that we did well and then redirect to the root route
+            } else {
               Users.findOne({_id: req.body.poster_id}, function(err, user){
                 user.posts.push(post._id);
                 user.save(function(err, user) {
                   if(err) {
                     res.json({message: 'Error occurred while updating your message', error: user.errors});
-                  } else { // else console.log that we did well and then redirect to the root route
+                  } else {
                     console.log('your topic successfully added!', user);
                     res.json(user);
                   }

@@ -10,7 +10,7 @@
   <div class='dashboard'>
     <div class='search'>
       <form>
-        <input class='input' type='text' ng-model='data_topic.search' placeholder='search...'>
+        <input class='input' type='text' ng-model='topic.search' placeholder='search...'>
         <input type='submit' ng-click='searchTopic()' value='Filter'>
       </form>
     </div>
@@ -22,7 +22,7 @@
           <th width='100'>User Name</th>
           <th width='100'>Posts</th>
         </tr>
-        <tr ng-repeat='topic in topics | filter:search | orderBy:"createdAt":true'>
+        <tr ng-repeat='topic in topics | filter:search | limitTo:-5 | orderBy:"createdAt":true'>
           <td ng-bind='topic.category'></td>
           <td><a href='' ng-click='getTopic(topic)'>{{topic.topic}}</a></td>
           <td><a href='' ng-click='getUser(topic._user._id)'>{{topic._user.name}}</a></td>

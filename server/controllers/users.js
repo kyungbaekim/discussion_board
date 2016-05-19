@@ -1,16 +1,10 @@
 var mongoose = require('mongoose');
 var Users = mongoose.model('Users');
-// var Topics = mongoose.model('Topics');
-// var Comments = mongoose.model('Comments');
 var sessionUser = {loggedIn: false};
 
 module.exports = {
   index: function(req, res) {
-    Users.find({})
-      .populate('topics')
-      .populate('posts')
-      .populate('comments')
-      .exec(function(err, data){
+    Users.find({}, function(err, data){
         if(err){
           res.json(err);
         }
@@ -35,7 +29,6 @@ module.exports = {
           id: user._id
         }
         res.json({sessionUser: sessionUser})
-        // res.json(user);
         }
       }
     })

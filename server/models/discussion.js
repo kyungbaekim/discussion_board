@@ -32,6 +32,10 @@ var DiscussionComments = new mongoose.Schema({
   comment: String,
 }, {timestamps: true});
 
+var DiscussionCategories = new mongoose.Schema({
+  category: String,
+}, {timestamps: true});
+
 // we can add validations using the .path() method.
 DiscussionUsers.path('name').required(true, 'Please enter your name to login');
 DiscussionTopics.path('topic').required(true, 'Topic field cannot be blank');
@@ -46,3 +50,4 @@ mongoose.model('Users', DiscussionUsers);
 mongoose.model('Topics', DiscussionTopics);
 mongoose.model('Posts', DiscussionPosts);
 mongoose.model('Comments', DiscussionComments);
+mongoose.model('Categories', DiscussionCategories);
